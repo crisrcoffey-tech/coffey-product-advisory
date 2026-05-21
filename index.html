@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Product Operations Consulting</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --panel: #151b23;
+      --panel-2: #1f2937;
+      --text: #f3f4f6;
+      --muted: #a3aab7;
+      --accent: #56d4ff;
+      --accent-2: #8b5cf6;
+      --line: rgba(255,255,255,.10);
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top left, rgba(86,212,255,.16), transparent 35%), var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    .nav {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo { font-weight: 800; letter-spacing: -.03em; }
+    .logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 22px; font-size: 14px; color: var(--muted); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #05070a;
+      border: 0;
+    }
+    .btn.secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+    .hero {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 72px 24px 56px;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .eyebrow { color: var(--accent); font-weight: 800; font-size: 13px; text-transform: uppercase; letter-spacing: .12em; }
+    h1 { font-size: clamp(42px, 6vw, 72px); line-height: .95; letter-spacing: -.06em; margin: 18px 0 22px; }
+    .hero p { font-size: 20px; color: var(--muted); max-width: 660px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 30px; }
+    .metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 36px; }
+    .metric { border: 1px solid var(--line); background: rgba(255,255,255,.04); padding: 16px; border-radius: 18px; }
+    .metric strong { display: block; font-size: 24px; }
+    .metric span { color: var(--muted); font-size: 13px; }
+    .visual {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border-radius: 28px;
+      padding: 22px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.32);
+    }
+    .window { background: #090c11; border-radius: 20px; overflow: hidden; border: 1px solid var(--line); }
+    .window-bar { height: 42px; display: flex; align-items: center; gap: 7px; padding: 0 14px; background: #121720; border-bottom: 1px solid var(--line); }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: #596274; }
+    .dashboard { padding: 18px; display: grid; gap: 14px; }
+    .dash-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .dash-card { background: #151b23; border: 1px solid var(--line); border-radius: 16px; padding: 14px; min-height: 92px; }
+    .dash-card b { display: block; margin-bottom: 8px; }
+    .bar { height: 8px; border-radius: 99px; background: linear-gradient(90deg, var(--accent), var(--accent-2)); margin-top: 10px; }
+    section { max-width: var(--max); margin: 0 auto; padding: 70px 24px; }
+    .section-head { max-width: 720px; margin-bottom: 30px; }
+    h2 { font-size: clamp(30px, 4vw, 46px); line-height: 1; letter-spacing: -.045em; margin: 0 0 16px; }
+    .section-head p, .card p, .package p { color: var(--muted); }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .card, .package, .quote {
+      background: rgba(255,255,255,.045);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 24px;
+    }
+    .card h3, .package h3 { margin: 0 0 10px; font-size: 22px; letter-spacing: -.02em; }
+    ul { padding-left: 20px; color: var(--muted); }
+    li { margin: 8px 0; }
+    .process { display: grid; gap: 14px; counter-reset: step; }
+    .step { display: grid; grid-template-columns: 72px 1fr; gap: 18px; align-items: start; padding: 20px; border: 1px solid var(--line); border-radius: 22px; background: rgba(255,255,255,.035); }
+    .num { width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; background: var(--panel-2); color: var(--accent); font-weight: 900; }
+    .step h3 { margin: 0 0 6px; }
+    .step p { margin: 0; color: var(--muted); }
+    .packages { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    .price { font-size: 30px; font-weight: 900; margin: 18px 0 4px; }
+    .best { outline: 2px solid rgba(86,212,255,.5); }
+    .cta { text-align: center; background: linear-gradient(135deg, rgba(86,212,255,.13), rgba(139,92,246,.14)); border: 1px solid var(--line); border-radius: 34px; padding: 54px 28px; }
+    .cta p { color: var(--muted); max-width: 720px; margin: 0 auto 28px; font-size: 18px; }
+    footer { max-width: var(--max); margin: 0 auto; padding: 34px 24px 60px; color: var(--muted); font-size: 14px; display: flex; justify-content: space-between; gap: 20px; border-top: 1px solid var(--line); }
+    @media (max-width: 880px) {
+      .hero, .grid-3, .packages { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .metrics { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="logo"><a href="/">Coffey Product Advisory</a></div>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="/services/product-delivery.html">Delivery Rescue</a>
+      <a href="/services/enterprise-readiness.html">Enterprise Readiness</a>
+      <a href="/services/fractional-product-leadership.html">Fractional</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <main class="hero">
+    <div>
+      <div class="eyebrow">AI Product Operations Consulting</div>
+      <h1>Ship faster. Operate cleaner. Use AI where it actually helps.</h1>
+      <p>I help software companies implement practical AI workflows, improve product delivery, and build the operating discipline of a larger organization without adding unnecessary overhead.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#contact">Book a strategy call</a>
+        <a class="btn secondary" href="#services">View services</a>
+      </div>
+      <div class="metrics">
+        <div class="metric"><strong>30%+</strong><span>usage growth from AI-enabled workflows</span></div>
+        <div class="metric"><strong>Monthly</strong><span>release cadence built and sustained</span></div>
+        <div class="metric"><strong>SaaS</strong><span>product, engineering, QA, and enterprise readiness</span></div>
+      </div>
+    </div>
+
+    <div class="visual">
+      <div class="window">
+        <div class="window-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+        <div class="dashboard">
+          <div class="dash-card"><b>AI Release Notes</b><span>Jira → GitHub → Customer-ready summary</span><div class="bar" style="width:88%"></div></div>
+          <div class="dash-row">
+            <div class="dash-card"><b>Bug Triage</b><span>Code + tickets scanned for defects</span><div class="bar" style="width:72%"></div></div>
+            <div class="dash-card"><b>Roadmap Signals</b><span>Feedback clustered by impact</span><div class="bar" style="width:81%"></div></div>
+          </div>
+          <div class="dash-card"><b>Delivery Health</b><span>Velocity, release risk, blocked work, QA load</span><div class="bar" style="width:92%"></div></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <section id="services">
+    <div class="section-head">
+      <h2>Services</h2>
+      <p>Focused consulting for software teams that need better execution, cleaner systems, and useful AI implementation.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <h3>AI Workflow Implementation</h3>
+        <p>Turn scattered product, engineering, support, and analytics data into useful AI-assisted workflows.</p>
+        <ul>
+          <li>AI release-note automation</li>
+          <li>Jira and GitHub workflow analysis</li>
+          <li>Customer feedback synthesis</li>
+          <li>Bug triage and QA assistance</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Product Delivery Optimization</h3>
+        <p>Help small software teams ship consistently without adding process theater or excessive management overhead.</p>
+        <ul>
+          <li>Release cadence design</li>
+          <li>Sprint and roadmap cleanup</li>
+          <li>QA and staging process improvements</li>
+          <li>Product operating dashboards</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Enterprise Readiness</h3>
+        <p>Prepare SaaS companies for larger customers, security reviews, procurement, and technical due diligence.</p>
+        <ul>
+          <li>Security questionnaire response systems</li>
+          <li>Architecture narrative cleanup</li>
+          <li>Compliance documentation</li>
+          <li>AI governance positioning</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="service-lines">
+    <div class="section-head">
+      <h2>Explore each service line</h2>
+      <p>Four focused practice areas. Each has its own scope, deliverables, and engagement options.</p>
+    </div>
+    <div class="grid-3">
+      <a class="card" href="/services/product-delivery.html" style="text-decoration:none;display:block">
+        <h3>Product Delivery Rescue →</h3>
+        <p>For software teams missing releases, drowning in Jira, or struggling to ship predictably. Release operating model, sprint cleanup, QA flow.</p>
+      </a>
+      <a class="card" href="/services/enterprise-readiness.html" style="text-decoration:none;display:block">
+        <h3>Enterprise Readiness →</h3>
+        <p>Get a SaaS product ready for larger customers. Security questionnaires, SSO, architecture docs, compliance narrative, procurement prep.</p>
+      </a>
+      <a class="card" href="/services/fractional-product-leadership.html" style="text-decoration:none;display:block">
+        <h3>Fractional Product Leadership →</h3>
+        <p>Embedded product leadership for founder-led teams without a senior PM. Strategy, roadmap, metrics, operating cadence.</p>
+      </a>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="section-head">
+      <h2>How it works</h2>
+      <p>A practical engagement model designed to produce usable outputs quickly.</p>
+    </div>
+    <div class="process">
+      <div class="step"><div class="num">01</div><div><h3>Assess the current operating system</h3><p>Review product process, release flow, tooling, metrics, Jira/GitHub usage, documentation, QA, and team bottlenecks.</p></div></div>
+      <div class="step"><div class="num">02</div><div><h3>Identify high-value AI workflow opportunities</h3><p>Prioritize places where AI can reduce manual effort, improve signal quality, or accelerate delivery.</p></div></div>
+      <div class="step"><div class="num">03</div><div><h3>Build working workflows</h3><p>Create practical automations, dashboards, templates, prompts, and team playbooks that can be used immediately.</p></div></div>
+      <div class="step"><div class="num">04</div><div><h3>Train the team and stabilize adoption</h3><p>Document the process, train stakeholders, refine based on usage, and leave the company with repeatable systems.</p></div></div>
+    </div>
+  </section>
+
+  <section id="packages">
+    <div class="section-head">
+      <h2>Engagement packages</h2>
+      <p>Example starting points. Final scope depends on team size, systems, and complexity.</p>
+    </div>
+    <div class="packages">
+      <div class="package">
+        <h3>AI/Product Ops Audit</h3>
+        <p>Best for teams that need a clear diagnosis and roadmap.</p>
+        <div class="price">$3k–$5k</div>
+        <ul>
+          <li>Workflow review</li>
+          <li>Tooling assessment</li>
+          <li>Opportunity map</li>
+          <li>Prioritized recommendations</li>
+        </ul>
+      </div>
+      <div class="package best">
+        <h3>30-Day Implementation Sprint</h3>
+        <p>Best for teams ready to implement practical AI workflows.</p>
+        <div class="price">$8k–$20k</div>
+        <ul>
+          <li>3–5 working workflows</li>
+          <li>Team training</li>
+          <li>Templates and documentation</li>
+          <li>Adoption support</li>
+        </ul>
+      </div>
+      <div class="package">
+        <h3>Fractional Product Advisor</h3>
+        <p>Best for ongoing product, delivery, and AI operations support.</p>
+        <div class="price">$2k–$5k/mo</div>
+        <ul>
+          <li>Monthly product leadership support</li>
+          <li>Roadmap and release guidance</li>
+          <li>AI workflow iteration</li>
+          <li>Executive advisory</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="quote">
+      <h2>Positioning statement</h2>
+      <p>“I help smaller software companies operate with the discipline, tooling, and AI-enabled leverage of much larger engineering organizations — without adding massive overhead.”</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="cta">
+      <h2>Want to see where AI can actually improve your software operation?</h2>
+      <p>Start with a focused review of your product workflow, release process, customer feedback loop, and team tooling. You will leave with a practical roadmap, not a theoretical AI strategy deck.</p>
+      <a class="btn" href="mailto:hello@example.com?subject=AI Product Operations Consultation">Schedule a consultation</a>
+    </div>
+  </section>
+
+  <footer>
+    <div>© 2026 Coffey Product Advisory</div>
+    <div>AI workflow implementation · Product operations · Enterprise readiness</div>
+  </footer>
+</body>
+</html>
